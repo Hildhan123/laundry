@@ -13,7 +13,7 @@
 	<div class="wrapper">
 		<div class="main-header">
 			<div class="logo-header">
-				<a href="index.html" class="logo">
+				<a href="/admin" class="logo">
 					ADMIN PANEL
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@
 									<a class="dropdown-item" href="#"><i class="ti-user"></i> My Profile</a>
 									<a class="dropdown-item" href="#"><i class="ti-email"></i> Inbox</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#"><i class="ti-settings"></i> Account Setting</a>
+									<a class="dropdown-item" href="{{ route('admin.profil') }}"><i class="ti-settings"></i> Account Setting</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#"><i class="fa fa-power-off"></i>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -106,13 +106,8 @@
 										</a>
 									</li>
 									<li>
-										<a href="#edit">
+										<a href="{{ route('admin.profil') }}">
 											<span class="link-collapse">Edit Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="#settings">
-											<span class="link-collapse">Settings</span>
 										</a>
 									</li>
 								</ul>
@@ -134,16 +129,56 @@
 								<span class="badge badge-success">3</span>
 							</a>
 						</li>
+						<hr>
+						@if( Auth::user()->peran == 'admin' )
+						
+						<li class="nav-item">
+							<a href="{{ route('admin.penjual') }}">
+								<i class="la la-bar-chart"></i>
+								<p>Daftar Penjual</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('admin.pembeli') }}">
+								<i class="la la-male"></i>
+								<p>Daftar Pembeli</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('admin.riwayat.order') }}">
+								<i class="la la-list-alt"></i>
+								<p>Riwayat Order</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="/admin">
+								<i class="la la-inbox"></i>
+								<p>Inbox</p>
+								<span class="badge badge-default">3</span>
+							</a>
+						</li>
+						@elseif(Auth::user()->peran == 'jasa')
+						<li class="nav-item">
+							<a href="/admin">
+								<i class="la la-inbox"></i>
+								<p>Buat Toko</p>
+								<span class="badge badge-default">3</span>
+							</a>
+						</li>
+						@endif
+
+						
 					</ul>
 				</div>
 			</div>
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
-						<h4 class="page-title">Dashboard</h4>
-                        <main class="py-4">
+						<h3 class="page-title">Dashboard</h3>
+
+                        
                         @yield('content')
-                        </main>
+                        
 						
 					</div>
 				</div>
