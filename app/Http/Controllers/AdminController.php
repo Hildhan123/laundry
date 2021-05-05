@@ -9,16 +9,40 @@ use Auth;
 
 class AdminController extends Controller
 {
-    public function index()
+   public function __construct()
     {
-        $user = Auth::user();
-        return view('laundry.admin.admin', compact('user'));
+        $this->middleware('auth')->except('');
     }
     
-    public function adminRegister(Request $request){
+    public function index(Request $request)
+    {
+        $user = Auth::user();
         
-        User::create([
-        'role' => $request->role,
-        ]);
+        return view('laundry.admin.admin', compact('user'));
+    }
+
+    public function profil()
+    {
+        return view('laundry.admin.profil');
+    }
+
+    public function daftarPenjual()
+    {
+        return view('laundry.admin.daftarPenjual');
+    }
+
+    public function daftarPembeli()
+    {
+        return view('laundry.admin.daftarPembeli');
+    }
+
+    public function riwayatOrder()
+    {
+        return view('laundry.admin.riwayatOrder');
+    }
+
+    public function inbox()
+    {
+        return view('laundry.admin.daftarPenjual');
     }
 }
