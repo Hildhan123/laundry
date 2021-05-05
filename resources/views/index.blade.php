@@ -136,8 +136,8 @@
                                     <i class="lni-bolt"></i>
                                 </div>
                                 <div class="services-content media-body">
-                                    <h4 class="services-title">Startup</h4>
-                                    <p class="text">Short description for the ones</br> who look for something new.</p>
+                                    <h4 class="services-title">Siap Pesan Antar</h4>
+                                    <p class="text">Kami menyediakan layanan pesan antar kapanpun dan dimanapun anda berada</p>
                                 </div>
                             </div> <!-- services content -->
                         </div>
@@ -147,8 +147,8 @@
                                     <i class="lni-bar-chart"></i>
                                 </div>
                                 <div class="services-content media-body">
-                                    <h4 class="services-title">SaaS Business</h4>
-                                    <p class="text">Short description for the ones</br> who look for something new.</p>
+                                    <h4 class="services-title">KADEK</h4>
+                                    <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                                 </div>
                             </div> <!-- services content -->
                         </div>
@@ -158,7 +158,7 @@
                                     <i class="lni-brush"></i>
                                 </div>
                                 <div class="services-content media-body">
-                                    <h4 class="services-title">Agency</h4>
+                                    <h4 class="services-title">GERY</h4>
                                     <p class="text">Short description for the ones</br> who look for something new.</p>
                                 </div>
                             </div> <!-- services content -->
@@ -169,8 +169,8 @@
                                     <i class="lni-bulb"></i>
                                 </div>
                                 <div class="services-content media-body">
-                                    <h4 class="services-title">App Landing</h4>
-                                    <p class="text">Short description for the ones</br> who look for something new.</p>
+                                    <h4 class="services-title">24/7 Support</h4>
+                                    <p class="text">Kami selalu menyediakan layanan support dan bantuan selama 24/7</p>
                                 </div>
                             </div> <!-- services content -->
                         </div>
@@ -285,28 +285,6 @@
     
      <!--====== CALL TO ACTION PART START ======-->
 
-    <section id="call-to-action" class="call-to-action">
-        <div class="call-action-image">
-            <img src="/images/call-to-action.png" alt="call-to-action">
-        </div>
-        
-        <div class="container-fluid">
-            <div class="row justify-content-end">
-                <div class="col-lg-6">
-                    <div class="call-action-content text-center">
-                        <h2 class="call-title">Curious to Learn More? Stay Tuned</h2>
-                        <p class="text">You let us know whenever you want us to update anything or think something can be optimised.</p>
-                        <div class="call-newsletter">
-                            <i class="lni-envelope"></i>
-                            <input type="text" placeholder="john@email.com">
-                            <button type="submit">SUBSCRIBE</button>
-                        </div>
-                    </div> <!-- slider-content -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </section>
-
     <!--====== CALL TO ACTION PART ENDS ======-->
     
     <!--====== CONTACT PART START ======-->
@@ -324,43 +302,75 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="contact-form">
-                        <form id="contact-form" action="/contact.php" method="post" data-toggle="validator">
+                        <form action="{{ route('register') }}" method="post">
+                            @csrf
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="single-form form-group">
-                                        <input type="text" name="name" placeholder="Your Name" data-error="Name is required." required="required">
+                                    <input id="name" placeholder="Nama" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name">
                                         <div class="help-block with-errors"></div>
-                                    </div> <!-- single form -->
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="single-form form-group">
-                                        <input type="email" name="email" placeholder="Your Email" data-error="Valid email is required." required="required">
-                                        <div class="help-block with-errors"></div>
-                                    </div> <!-- single form -->
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="single-form form-group">
-                                        <input type="text" name="subject" placeholder="Subject" data-error="Subject is required." required="required">
-                                        <div class="help-block with-errors"></div>
-                                    </div> <!-- single form -->
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="single-form form-group">
-                                        <input type="text" name="phone" placeholder="Phone" data-error="Phone is required." required="required">
-                                        <div class="help-block with-errors"></div>
+                                        @error('name')
+                                                 <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                     </div> <!-- single form -->
                                 </div>
                                 <div class="col-md-12">
                                     <div class="single-form form-group">
-                                        <textarea placeholder="Your Mesaage" name="message" data-error="Please, leave us a message." required="required"></textarea>
+                                        <input placeholder="Email" input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                                         <div class="help-block with-errors"></div>
+                                        @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                     </div> <!-- single form -->
                                 </div>
-                                <p class="form-message"></p>
+                                <div class="col-md-12">
+                                    <div class="single-form form-group">
+                                    <label for="peran" class="">{{ __('Daftar Sebagai') }}</label>
+                                    <select class="form-control" name="peran" id="peran">
+                                        <option value="pembeli"
+                                            {{ old('peran')=='pembeli' ? 'selected': '' }} >
+                                        Guest / Pembeli
+                                        </option>
+                                        <option value="jasa"
+                                            {{ old('peran')=='jasa' ? 'selected': '' }} >
+                                        Toko Jasa Laundry / Penjual
+                                        </option>
+                                    </select>
+                                        <div class="help-block with-errors"></div>
+                                        @error('peran')
+                                    <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div> <!-- single form -->
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="single-form form-group">
+                                    <input placeholder="Password" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                        <div class="help-block with-errors">
+                                        </div>
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div> <!-- single form -->
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="single-form form-group">
+                                    <input placeholder="Konfirmasi Password" id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                        <div class="help-block with-errors">
+
+                                        </div>
+                                    </div> <!-- single form -->
+                                </div>
                                 <div class="col-md-12">
                                     <div class="single-form form-group text-center">
-                                        <button type="submit" class="main-btn">send message</button>
+                                        <button type="submit" class="main-btn">{{ __('Daftar Sekarang') }}</button>
                                     </div> <!-- single form -->
+                                    
                                 </div>
                             </div> <!-- row -->
                         </form>
@@ -371,6 +381,56 @@
     </section>
 
     <!--====== CONTACT PART ENDS ======-->
+
+    <section id="testimoni">
+     <div class="row justify-content-center">
+                <div class="col-lg-8 section-title text-center pb-10">
+                <h3 class="title text-center">Apa Kata Mereka</h3>
+                <br>
+                <br>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" class="bg-dark" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" class="bg-dark" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" class="bg-dark" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="..." alt="">
+      <blockquote class="blockquote text-center">
+            <p class="mb-0">"Pelayanan sangat baik, fitur oke, de best pokoknya"</p>
+            <p class="blockquote-footer">Agus <cite title="Source Title">- Penjual Jasa Laundry</cite></p>
+      </blockquote>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="..." alt="">
+      <blockquote class="blockquote text-center">
+            <p class="mb-0">"Fitur pesanan oke, weksite oke, lebih gampang"</p>
+            <p class="blockquote-footer">Budi <cite title="Source Title">- Pembeli</cite></p>
+      </blockquote>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="..." alt="">
+      <blockquote class="blockquote text-center">
+            <p class="mb-0">"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni quos ullam possimus architecto dicta, iusto quibusdam libero quis delectus repudiandae sed odit perferendis ab laborum nobis, reprehenderit molestias, quaerat minus!"</p>
+            <p class="blockquote-footer">Munir <cite title="Source Title">- Pembeli</cite></p>
+      </blockquote>
+    </div>
+  </div>
+  <br>
+  <br>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</div>
+</div>
+</section>
 
     <!--====== FOOTER PART START ======-->
 
