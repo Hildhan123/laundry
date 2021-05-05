@@ -25,6 +25,11 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'landingPage'])->na
 
 // Route Hildhan
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('adminDB')->middleware('admin');
+Route::get('/admin/profil', [App\Http\Controllers\AdminController::class, 'profil'])->name('admin.profil');
+Route::get('/admin/penjual', [App\Http\Controllers\AdminController::class, 'daftarPenjual'])->name('admin.penjual');
+Route::get('/admin/pembeli', [App\Http\Controllers\AdminController::class, 'daftarPembeli'])->name('admin.pembeli');
+Route::get('/admin/riwayat', [App\Http\Controllers\AdminController::class, 'riwayatOrder'])->name('admin.riwayat.order');
+Route::get('/admin/inbox', [App\Http\Controllers\AdminController::class, 'inbox'])->name('admin.inbox');
 
 // Route Gery
 
