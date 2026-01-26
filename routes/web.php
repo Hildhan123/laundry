@@ -31,7 +31,12 @@ Route::get('/admin/inbox', [App\Http\Controllers\AdminController::class, 'inbox'
 
 // Route Bawaan Auth
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $user = Auth::user();
+    if ($user->peran == 'admin') {
+        return redirect()->route('adminDB');
+    } else {
+        return view('dashboard');
+    }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
