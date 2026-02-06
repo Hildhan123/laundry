@@ -13,8 +13,8 @@
 	<div class="wrapper">
 		<div class="main-header">
 			<div class="logo-header">
-				<a href="/admin" class="logo">
-					ADMIN PANEL
+				<a href="/home" class="logo">
+					DASHBOARD PANEL
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -23,37 +23,33 @@
 			</div>
 			<nav class="navbar navbar-header navbar-expand-lg">
 				<div class="container-fluid">
-					
-					<form class="navbar-left navbar-form nav-search mr-md-3" action="">
-						<div class="input-group">
-							<input type="text" placeholder="Search ..." class="form-control">
-							<div class="input-group-append">
-								<span class="input-group-text">
-									<i class="la la-search search-icon"></i>
-								</span>
-							</div>
-						</div>
-					</form>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 						
 						<li class="nav-item dropdown">
-							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="/img/profile.jpg" alt="user-img" width="36" class="img-circle"><span >{{ Auth::user()->name }}</span></span> </a>
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="@yield('foto')" alt="user-img" width="36" class="img-circle"><span >{{ Auth::user()->name }}</span></span> </a>
 							<ul class="dropdown-menu dropdown-user">
 								<li>
 									<div class="user-box">
-										<div class="u-img"><img src="/img/profile.jpg" alt="user"></div>
+										<div class="u-img"><img src="@yield('foto')" alt="user"></div>
 										<div class="u-text">
 											<h4> {{ Auth::user()->name }}</h4>
 										</div>
 										</div>
 									</li>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#"><i class="ti-user"></i> My Profile</a>
+									<a class="dropdown-item" href="
+									@if(Auth::user()->peran == 'admin') {{ route('admin.profil') }} 
+									@elseif(Auth::user()->peran =='penjual') {{ route('penjual.profil') }}
+									@elseif(Auth::user()->peran =='pembeli') {{ route('pembeli.profil') }}
+									@endif"><i class="ti-user"></i> My Profile</a>
 									<a class="dropdown-item" href="#"><i class="ti-email"></i> Inbox</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="{{ route('admin.profil') }}"><i class="ti-settings"></i> Account Setting</a>
+									<a class="dropdown-item" href="
+									@if(Auth::user()->peran == 'admin') {{ route('admin.edit.profil') }} 
+									@elseif(Auth::user()->peran =='penjual') {{ route('penjual.edit.profil') }}
+									@elseif(Auth::user()->peran =='pembeli') {{ route('pembeli.edit.profil') }}
+									@endif"><i class="ti-settings"></i> Edit Profile</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#"><i class="fa fa-power-off"></i>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -74,7 +70,7 @@
 				<div class="scrollbar-inner sidebar-wrapper">
 					<div class="user">
 						<div class="photo">
-							<img src="/img/profile.jpg">
+							<img src="@yield('foto')">
 						</div>
 						<div class="info">
 							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -84,10 +80,10 @@
                                     @if( Auth::user()->peran == 'admin' )
                                     <div>ADMIN</div>
 
-                                    @elseif( Auth::user()->peran  == 'jasa')
+                                    @elseif( Auth::user()->peran  == 'penjual')
                                     <div>Jasa Laundry</div>
 
-                                    @elseif( Auth::user()->peran == 'guest')
+                                    @elseif( Auth::user()->peran == 'pembeli')
                                     <div>Pembeli</div>
 
                                     @endif
@@ -101,13 +97,21 @@
 							<div class="collapse in" id="collapseExample" aria-expanded="true" style="">
 								<ul class="nav">
 									<li>
-										<a href="#profile">
-											<span class="link-collapse">My Profile</span>
+										<a href="
+										@if(Auth::user()->peran == 'admin') {{ route('admin.buat.profil') }} 
+										@elseif(Auth::user()->peran =='penjual') {{ route('penjual.buat.profil') }}
+										@elseif(Auth::user()->peran =='pembeli') {{ route('pembeli.buat.profil') }}
+										@endif">
+											<span class="link-collapse">Buat Profil</span>
 										</a>
 									</li>
 									<li>
-										<a href="{{ route('admin.profil') }}">
-											<span class="link-collapse">Edit Profile</span>
+										<a href="
+										@if(Auth::user()->peran == 'admin') {{ route('admin.edit.profil') }}
+										@elseif(Auth::user()->peran =='penjual') {{ route('penjual.edit.profil') }}
+										@elseif(Auth::user()->peran =='pembeli') {{ route('pembeli.edit.profil') }}
+										@endif">
+											<span class="link-collapse">Perbarui Profil</span>
 										</a>
 									</li>
 								</ul>
@@ -115,68 +119,39 @@
 						</div>
 					</div>
 					<ul class="nav">
-						<li class="nav-item active">
+						<li class="nav-item @yield('menudashboard')">
 							<a href="{{ route('adminDB') }}">
 								<i class="la la-dashboard"></i>
 								<p>Dashboard</p>
-								<span class="badge badge-count">5</span>
+								<span class="badge badge-count"></span>
 							</a>
 						</li>
-						<li class="nav-item">
+						<!--<li class="nav-item">
 							<a href="notifications.html">
 								<i class="la la-bell"></i>
 								<p>Notifications</p>
 								<span class="badge badge-success">3</span>
 							</a>
 						</li>
-						<hr>
-						@if( Auth::user()->peran == 'admin' )
-						
-						<li class="nav-item">
-							<a href="{{ route('admin.penjual') }}">
-								<i class="la la-bar-chart"></i>
-								<p>Daftar Penjual</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="{{ route('admin.pembeli') }}">
-								<i class="la la-male"></i>
-								<p>Daftar Pembeli</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="{{ route('admin.riwayat.order') }}">
-								<i class="la la-list-alt"></i>
-								<p>Riwayat Order</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="/admin">
-								<i class="la la-inbox"></i>
-								<p>Inbox</p>
-								<span class="badge badge-default">3</span>
-							</a>
-						</li>
-						@elseif(Auth::user()->peran == 'jasa')
-						<li class="nav-item">
-							<a href="/admin">
-								<i class="la la-inbox"></i>
-								<p>Buat Toko</p>
-								<span class="badge badge-default">3</span>
-							</a>
-						</li>
-						@endif
-
-						
+						<hr>-->
+						@yield('navbar')
+											
 					</ul>
 				</div>
 			</div>
 			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
-						<h3 class="page-title">Dashboard</h3>
+						
 
-                        
+					@if(session()->has('pesan'))
+        				<div class="alert alert-success la la-thumbs-up"> {{session()->get('pesan')}} </div>
+					@elseif(session()->has('pesan1'))
+        				<div class="alert alert-danger la la-ban"> {{session()->get('pesan1')}} </div>
+						@elseif(session()->has('pesan2'))
+        				<div class="alert alert-warning la la-exclamation"> {{session()->get('pesan2')}} </div>
+					@endif
+					
                         @yield('content')
                         
 						
@@ -187,19 +162,19 @@
 						<nav class="pull-left">
 							<ul class="nav">
 								<li class="nav-item">
-									<a class="nav-link" href="http://www.themekita.com">
+									<a class="nav-link" href="/">
 										Home
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="#">
+									<a class="nav-link" href="/bantuan">
 										Bantuan
 									</a>
 								</li>
 							</ul>
 						</nav>
 						<div class="copyright ml-auto">
-							2018, made with <i class="la la-heart heart text-danger"></i> by <a href="http://www.themekita.com">ThemeKita</a>
+							Copyright 2021 <i class="la la-heart heart text-danger"></i>Powered by <a href="/">Tim PKM Universitas Negeri Malang</a>
 						</div>				
 					</div>
 				</footer>
@@ -213,14 +188,15 @@
 <script src="{{ asset('js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('js/core/popper.min.js') }}"></script>
 <script src="{{ asset('js/core/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/plugin/chartist/chartist.min.js') }}"></script>
+<script src="{{ asset('js/ready.min.js') }}"></script>
+<script src="{{ asset('js/demo.js') }}"></script>
+<!--<script src="{{ asset('js/plugin/chartist/chartist.min.js') }}"></script>
 <script src="{{ asset('js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js') }}"></script>
-<!--<script src="{{ asset('js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>-->
+<script src="{{ asset('js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 <script src="{{ asset('js/plugin/bootstrap-toggle/bootstrap-toggle.min.js') }}"></script>
 <script src="{{ asset('js/plugin/jquery-mapael/jquery.mapael.min.js') }}"></script>
 <script src="{{ asset('js/plugin/jquery-mapael/maps/world_countries.min.js') }}"></script>
 <script src="{{ asset('js/plugin/chart-circle/circles.min.js') }}"></script>
 <script src="{{ asset('js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
-<script src="{{ asset('js/ready.min.js') }}"></script>
-<script src="{{ asset('js/demo.js') }}"></script>
+<script src="{{ asset('js/plugin/datatables/datatables.min.js') }}"></script>-->
 </html>
