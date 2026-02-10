@@ -45,7 +45,7 @@
                                             	@endif
                                             </td>
                                             <td>
-                                                <a href="https://api.whatsapp.com/send?phone=62{{$r->no_hp_toko}}&text=Assalamualaikum%20Saya%20{{$r->nama_pembeli}}%20ingin%20membeli%20salah%20satu%20paket%20anda%20yang%20bernama%20({{$r->nama_paket}})%20Dengan%20ID%20Order%20{{$r->id_order}}%20Terimakasih"                                                
+                                                <a href="https://api.whatsapp.com/send?phone=62{{$r->no_hp_toko}}&text=Permisi%20Saya%20{{$r->nama_pembeli}}%20ingin%20membeli%20salah%20satu%20paket%20anda%20yang%20bernama%20({{$r->nama_paket}})%20Dengan%20ID%20Order%20{{$r->id_order}}%20Terimakasih"                                                
                                                  class="btn btn-success btn-sm">Hubungi Penjual</a>
                                                 @if($r->status == 'Belum Bayar')
                                                 <a href="{{ url('/pembeli/riwayat/cancel/'.$r->id_order) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin?');">Cancel</a>
