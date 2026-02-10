@@ -17,13 +17,26 @@ class GuestMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->peran != "pembeli"){
+        if (!Auth::check()) 
+        {
+            return redirect()->route('login');
+        }
+        else {
+        if(Auth::user()->peran == "pembeli")
+        {
             /* 
             silahkan modifikasi pada bagian ini
             apa yang ingin kamu lakukan jika rolenya tidak sesuai
             */
-            return redirect()->to('login')->with('pesan',"Harap login terlebih dahulu");;
-        }
+           
+            //$request->session()->flash('pesan', "Mantap");
         return $next($request);
+        }
+        else
+        {
+            return redirect()->route('login');
+        }
+    
     }
+}
 }

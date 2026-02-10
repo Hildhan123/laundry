@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Reset Password')
 
 @section('content')
 <div class="container">
@@ -6,8 +7,12 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Reset Password') }}</div>
-
                 <div class="card-body">
+                    @if(session()->has('pesan'))
+                        <div class="alert alert-success">
+                            {{session()->get('pesan')}}
+                        </div>
+                    @endif
                     <form method="POST" action="{{ route('password.update') }}">
                         @csrf
 

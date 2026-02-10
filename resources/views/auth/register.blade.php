@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Register')
 
 @section('content')
 <div class="container">
@@ -6,7 +7,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
@@ -42,25 +42,21 @@
                             <label for="peran" class="col-md-4 col-form-label text-md-right">{{ __('Daftar Sebagai') }}</label>
 
                             <div class="col-md-6">
-                           
-                            <select class="form-control" name="peran" id="peran">
-                                <option value="pembeli"
-                                    {{ old('peran')=='pembeli' ? 'selected': '' }} >
-                                    Guest / Pembeli
-                                </option>
-                                <option value="jasa"
-                                    {{ old('peran')=='jasa' ? 'selected': '' }} >
-                                    Toko Jasa Laundry
-                                </option>
-                                 </select>
+                                <select class="form-control" name="peran" id="peran">
+                                    <option value="pembeli"
+                                        {{ old('peran')=='pembeli' ? 'selected': '' }} >
+                                        Guest / Pembeli
+                                    </option>
+                                    <option value="penjual"
+                                        {{ old('peran')=='penjual' ? 'selected': '' }} >
+                                        Toko Jasa Laundry / Penjual
+                                    </option>
+                                </select>
                                 @error('peran')
                                 <div class="text-danger">{{ $message }}</div>
-                                 @enderror
-
-                                 
+                                @enderror
+                            </div>
                         </div>
-                        </div>
-                            
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

@@ -30,14 +30,15 @@
     <!--====== Style css ======-->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/ready.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/demo.css') }}">
+
 
 </head>
 
 <body>
 
-    <!--====== HEADER PART START ======-->
-
-    <nav class="header-area navbar navbar-expand-lg">
+<header class="header-area">
         <div class="navgition navgition-transparent">
             <div class="container">
                 <div class="row">
@@ -55,14 +56,14 @@
 
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarOne">
                                 <ul class="navbar-nav m-auto">
-                                    <li class="nav-item active">
+                                    <li class="nav-item">
                                         <a class="page-scroll" href="/">HOME</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="page-scroll" href="/#about">MENGAPA KAMI</a>
+                                        <a class="page-scroll" href="/tentang-kami">MENGAPA KAMI</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="page-scroll" href="/#pesan">PESAN</a>
+                                        <a class="page-scroll" href="/pesan">PESAN</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="page-scroll" href="/register">DAFTAR</a>
@@ -72,6 +73,8 @@
                                     </li>
                                 </ul>
                             </div>
+
+                            
 
                             <div class="navbar-social d-none d-sm-flex align-items-center">
                                 <span>FOLLOW US</span>
@@ -84,16 +87,37 @@
                                
                             </div>
                          
-                        </nav> <!-- navbar -->                          
+                        </nav> <!-- navbar -->
                     </div>
                 </div> <!-- row -->
-                @yield('content')
             </div> <!-- container -->
         </div> <!-- navgition -->
-    </nav>
+
+        <div id="home" class="header-hero bg_cover" style="background-image: url(/image/carausel/1.jpg)">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-10">
+                        <div class="header-content text-center">
+                            <h3 class="header-title">JASA LAUNDRY ONLINE</h3>
+                            <p class="text">Untuk Wilayah Malang dan Sekitarnya</p>
+                            <ul class="header-btn">
+                                @yield('search')
+                            </ul>
+                        </div> <!-- header content -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+            <div class="header-shape">
+                <img src="/images/header-shape.svg" alt="shape">
+            </div>
+        </div> <!-- header content -->
+    </header>
+
     
     <!--====== CONTACT PART ENDS ======-->
-                                                <!-- conteiner -->
+    <div class="container">
+                @yield('content')           
+    </div>                                  <!-- conteiner -->
     <!--====== FOOTER PART START ======-->
 
     <footer id="footer" class="footer-area">
@@ -116,27 +140,28 @@
                         </div> <!-- footer logo support -->
                     </div>
                 </div> <!-- row -->
-                <div class="row">
-                    <div class="col-6 col-md-4">
+                <div class="row justify-content-between">
+                    <div class="col-4">
                         <div class="footer-link">
                             <h6 class="footer-title">Tentang Kami</h6>
                             <br>
-                           <p>Kami adalah layanan bla bla bla</p>
+                           <p>Kami adalah layanan pemesanan laundry online dimana kami mewadahi penjual sebagai jasa laundry dan tamu sebagai pembeli</p>
+                           <a href="/tentang-kami">Lihat Selengkapnya</a>
                         </div> <!-- footer link -->
                     </div>
-                    <div class="col-6 col-md-4">
+                    <!--<div class="col-6 col-md-4">
                         <div class="footer-newsletter">
                             <h6 class="footer-title">Bingung diisi apa</h6>
                            <br>
                            <p> bla bla bla </p>
                         
-                        </div> <!-- footer newsletter -->
-                    </div>
-                    <div class="col-6 col-md-4">
+                        </div> 
+                    </div>-->
+                    <div class="col-4">
                         <div class="footer-link">
                             <h6 class="footer-title">Bantuan</h6>
                             <ul>
-                                <li><a href="#">Support Center</a></li>
+                                <li><a href="/bantuan">Support Center</a></li>
                                 <li><a href="#">FAQ</a></li>
                                 <li><a href="#">Syarat dan Ketentuan</a></li>
                             </ul>
@@ -151,7 +176,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="copyright text-center">
-                            <p class="text">Copyright 2021 <a rel="nofollow" href="/">Laundry</a> - Powered by <a el="nofollow" href="/">Kelompok 10</a></p>
+                            <p class="text">Copyright 2021 <a rel="nofollow" href="/"></a> - Powered by <a el="nofollow" href="/">Tim PKM Universitas Negeri Malang</a></p>
                         </div>
                     </div>
                 </div> <!-- row -->

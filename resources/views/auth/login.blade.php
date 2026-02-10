@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Login')
 
 @section('content')
 <div class="container">
@@ -6,14 +7,12 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
-
- @if(session()->has('pesan'))
-      <div class="alert alert-danger">
-        {{ redirect()->get('pesan') }}
-      </div>
-@endif
-
                 <div class="card-body">
+                    @if(session()->has('pesan'))
+                        <div class="alert alert-success">
+                            {{session()->get('pesan')}}
+                        </div>
+                    @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

@@ -17,13 +17,26 @@ class JasaMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->peran != "jasa"){
+        if (!Auth::check()) 
+        {
+            return redirect()->route('login');
+        }
+        else {
+        if(Auth::user()->peran == "penjual")
+        {
             /* 
             silahkan modifikasi pada bagian ini
             apa yang ingin kamu lakukan jika rolenya tidak sesuai
             */
-            return redirect()->to('login')->with('pesan',"Harap login terlebih dahulu");;
-        }
+           
+            //$request->session()->flash('pesan', "");
         return $next($request);
+        }
+        else
+        {
+            return redirect()->route('login');
+        }
+    
     }
+}
 }

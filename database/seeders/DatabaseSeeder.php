@@ -39,5 +39,22 @@ class DatabaseSeeder extends Seeder
             'created_at' => \Carbon\Carbon::now(),
             'email_verified_at' => \Carbon\Carbon::now()
         ]);
+        DB::table('users')->insert([
+            'name' => 'penjual',
+            'email' => 'penjual@gmail.com',
+            'password' => Hash::make('penjual123'),
+            'peran' => 'penjual',
+            'created_at' => \Carbon\Carbon::now(),
+            'email_verified_at' => \Carbon\Carbon::now()
+        ]);
+        DB::table('users')->insert([
+            'name' => 'pembeli',
+            'email' => 'pembeli@gmail.com',
+            'password' => Hash::make('pembeli123'),
+            'peran' => 'pembeli',
+            'created_at' => \Carbon\Carbon::now(),
+            'email_verified_at' => \Carbon\Carbon::now()
+        ]);
+        
     }
 }

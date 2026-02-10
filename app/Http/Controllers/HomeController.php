@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('landingPage');
+        $this->middleware('auth');
     }
 
     /**
@@ -28,15 +28,13 @@ class HomeController extends Controller
         if($peran == "admin"){
             return redirect()->intended('admin');
         } else if($peran == "pembeli"){
-            return redirect()->to('user');
-        } else if($peran == "jasa"){
-            return redirect()->to('jasa'); 
+            return redirect()->to('pembeli');
+        } else if($peran == "penjual"){
+            return redirect()->route('penjual.index');
         } else {
             return redirect()->to('logout');
         }
     
     }
-    public function landingPage(){
-        return view('index');
-    }
+    
 }

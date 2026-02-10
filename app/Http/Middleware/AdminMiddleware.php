@@ -18,16 +18,26 @@ class AdminMiddleware
     
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->peran != "admin" || session(['hakakses' != 'admin'])){
+        if (!Auth::check()) 
+        {
+            return redirect()->route('login');
+        }
+        else {
+        if(Auth::user()->peran == "admin")
+        {
             /* 
             silahkan modifikasi pada bagian ini
             apa yang ingin kamu lakukan jika rolenya tidak sesuai
             */
-            $request->session()->flash('pesan',"Harap login terlebih dahulu");
-            return redirect()->to('login');  
-        }
-        else {
+           
+            //$request->session()->flash('pesan', "");
         return $next($request);
+        }
+        else
+        {
+            return redirect()->route('login');
+        }
+    
     }
 }
 }
