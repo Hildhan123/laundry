@@ -1,61 +1,82 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Laundry Online - Malang
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+A web-based laundry service platform built with Laravel 12 for the Malang area.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### User Roles
+- **Admin**: Manage users, laundry services, orders, and system settings
+- **Penjual (Seller)**: Manage laundry shop, packages, and order processing
+- **Pembeli (Buyer)**: Browse services, place orders, and track history
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Core Functionality
+- Online laundry service booking
+- Multiple laundry packages with pricing
+- Order tracking and history
+- User authentication and role management
+- Shop management for laundry service providers
+- Admin dashboard for system oversight
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tech Stack
 
-## Learning Laravel
+- **Backend**: Laravel 12 (PHP 8.2+)
+- **Frontend**: Bootstrap, jQuery, Line Icons
+- **Database**: MySQL (Laravel Eloquent ORM)
+- **Authentication**: Laravel Breeze
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Project Structure
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+app/Models/
+├── User.php          # Base user model with role field
+├── Admin.php         # Admin profile model
+├── Penjual.php       # Seller profile model
+├── Pembeli.php       # Buyer profile model
+├── Paket.php         # Laundry package model
+├── Toko.php          # Shop model
+└── Riwayat.php       # Order history model
 
-## Laravel Sponsors
+app/Http/Controllers/
+├── AdminController.php
+├── PenjualController.php
+├── PembeliController.php
+├── UmumController.php
+└── Auth/             # Authentication controllers
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+resources/views/
+├── layouts/         # Layout templates
+├── auth/            # Authentication views
+├── laundry/         # Role-specific views
+└── index.blade.php  # Landing page
+```
 
-### Premium Partners
+## Installation
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+1. Clone the repository
+2. Install dependencies: `composer install`
+3. Copy environment file: `cp .env.example .env`
+4. Generate app key: `php artisan key:generate`
+5. Configure database in `.env`
+6. Run migrations: `php artisan migrate`
+7. Start development server: `php artisan serve`
 
-## Contributing
+## Usage
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Landing Page**: Browse services and register
+- **Admin**: Access `/admin` for system management
+- **Sellers**: Manage shop at `/penjual`
+- **Buyers**: Place orders at `/pembeli`
 
-## Code of Conduct
+## Database Schema
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **users**: Base user table with role field
+- **admins**: Admin profiles
+- **penjuals**: Seller profiles
+- **pembelis**: Buyer profiles
+- **tokos**: Laundry shop information
+- **pakets**: Laundry service packages
+- **riwayats**: Order history
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT License - Built for educational purposes by Kelompok 10, Universitas Negeri Malang
